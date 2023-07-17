@@ -12,11 +12,24 @@ let package = Package(
             name: "Platform",
             targets: ["Platform"]),
     ],
+    dependencies: [
+      .package(path: "../Domain"),
+      .package(path: "../Functor"),
+      .package(
+        url: "https://github.com/Alamofire/Alamofire.git",
+        .upToNextMajor(from: "5.7.1")),
+    ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "Platform"),
+            name: "Platform",
+            dependencies: [
+              "Domain",
+              "Functor",
+              "Alamofire",
+            ]
+        ),
         .testTarget(
             name: "PlatformTests",
             dependencies: ["Platform"]),

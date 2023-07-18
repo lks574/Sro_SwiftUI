@@ -19,13 +19,32 @@ extension PokemonListPage {
   }
 }
 
+extension PokemonListPage {
+  private var searchViewState: SearchView.ViewState {
+    .init(sortType: .name, searchText: viewStore.$searchText)
+  }
+
+  private var searchViewAction: SearchView.ViewAction {
+    .init(typeAction: { viewStore.send(.onTapSearchType($0)) })
+  }
+}
+
 extension PokemonListPage: View {
 
   public var body: some View {
-    VStack {
+    VStack(spacing: .zero) {
+      SearchView(
+        viewState: searchViewState,
+        viewAction: searchViewAction)
       ScrollView(.vertical, showsIndicators: false) {
         PokemonComponent(viewState: pokemonComponentViewState)
+          .padding(.vertical, 24)
+          .padding(.horizontal, 12)
+          .background(PokemonColor.Grayscale.White.Color)
+          .cornerRadius(8)
+          .padding(4)
       }
+      .background(PokemonColor.Identity.Primary.Color)
     }
     .onAppear {
       viewStore.send(.getPokeList)

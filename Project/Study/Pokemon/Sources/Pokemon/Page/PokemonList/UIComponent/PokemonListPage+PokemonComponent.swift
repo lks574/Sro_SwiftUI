@@ -24,11 +24,9 @@ extension PokemonListPage.PokemonComponent {
 extension PokemonListPage.PokemonComponent: View {
 
   public var body: some View {
-    VStack {
-      LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]) {
-        ForEach(viewState.cards, id: \.id) {
-          PokemonListPage.PokemonCard(viewState: $0)
-        }
+    LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]) {
+      ForEach(viewState.cards, id: \.id) {
+        PokemonListPage.PokemonCard(viewState: $0)
       }
     }
   }

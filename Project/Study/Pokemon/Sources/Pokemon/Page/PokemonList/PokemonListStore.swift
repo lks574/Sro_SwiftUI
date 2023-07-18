@@ -17,13 +17,14 @@ public struct PokemonListStore: ReducerProtocol {
     public init() {}
 
     var results: PokemonRepository.PokemonList? = .none
+    @BindingState var searchText: String = ""
   }
 
   public enum Action: Equatable, BindableAction {
     case binding(BindingAction<State>)
+    case onTapSearchType(PokemonListPage.SearchView.SortType)
 
     case getPokeList
-
     case fetchPokeList(Result<PokemonRepository.PokemonList, ErrorDomain>)
   }
 
@@ -35,10 +36,14 @@ public struct PokemonListStore: ReducerProtocol {
       case .binding:
         return .none
 
+      case let .onTapSearchType(type):
+        return .none
+
       case .getPokeList:
         return env.getPokemonList()
           .map(Action.fetchPokeList)
           .cancellable(id: CancelID.requestPokemonListID, cancelInFlight: true)
+        
 
       case .fetchPokeList(let res):
         switch res {

@@ -15,6 +15,8 @@ public struct PokemonListStore: ReducerProtocol {
   public struct State: Equatable {
 
     public init() {}
+
+    var results: PokemonRepository.PokemonList? = .none
   }
 
   public enum Action: Equatable, BindableAction {
@@ -41,6 +43,7 @@ public struct PokemonListStore: ReducerProtocol {
       case .fetchPokeList(let res):
         switch res {
         case let .success(response):
+          state.results = response
           return .none
         case let .failure(error):
           return .none

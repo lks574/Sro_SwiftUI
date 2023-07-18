@@ -14,14 +14,14 @@ extension PokemonListPage {
 extension PokemonListPage.PokemonCard {
   public struct ViewState: Equatable, Identifiable {
 
-    init(imageString: String, name: String, number: String) {
-      self.imageString = imageString
+    init(url: String, name: String, number: String) {
+      self.url = url
       self.name = name
       self.number = number
     }
 
     public var id: String { number }
-    let imageString: String
+    let url: String
     let name: String
     let number: String
   }
@@ -42,9 +42,8 @@ extension PokemonListPage.PokemonCard: View {
           .foregroundColor(PokemonColor.Grayscale.Medium.Color)
           .frame(maxWidth: .infinity, alignment: .trailing)
 
-        Image(viewState.imageString, bundle: .module)
-          .resizable()
-          .frame(width: 72, height: 72)
+        AsyncImage(url: URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/\(viewState.number).png"))
+        .frame(width: 72, height: 72)
 
         Text(viewState.name)
           .font(PokemonFont.Body.body3)
@@ -63,9 +62,9 @@ struct PokemonListPage_PokemonCard_Previews: PreviewProvider {
   static var previews: some View {
     PokemonListPage.PokemonCard(
       viewState: .init(
-        imageString: "image_0",
+        url: "image_0",
         name: "Pokémon Name",
-        number: "999")
+        number: "1")
     )
     .previewLayout(PreviewLayout.sizeThatFits)
   }

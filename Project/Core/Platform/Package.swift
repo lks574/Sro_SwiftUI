@@ -28,6 +28,9 @@ let package = Package(
               "Domain",
               "Functor",
               "Alamofire",
+            ],
+            resources: [
+              .process("Resources/Mock/Pokemon/pokemon.json"),
             ]
         ),
         .testTarget(

@@ -1,4 +1,6 @@
 import SwiftUI
+import Pokemon
+import ComposableArchitecture
 
 @main
 struct AppMain: App {
@@ -6,9 +8,12 @@ struct AppMain: App {
   var body: some Scene {
     WindowGroup {
       NavigationView {
-        VStack {
-          Text("Pokemon")
-        }
+        PokemonListPage(
+          store: .init(
+            initialState: PokemonListStore.State(),
+            reducer: PokemonListStore()
+          )
+        )
       }
     }
   }

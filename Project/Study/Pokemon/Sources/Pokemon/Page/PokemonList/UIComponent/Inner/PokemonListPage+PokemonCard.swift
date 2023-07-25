@@ -14,16 +14,16 @@ extension PokemonListPage {
 extension PokemonListPage.PokemonCard {
   public struct ViewState: Equatable, Identifiable {
 
-    init(url: String, name: String, number: String) {
+    init(url: String, name: String, number: Int) {
       self.url = url
       self.name = name
       self.number = number
     }
 
-    public var id: String { number }
+    public var id: Int { number }
     let url: String
     let name: String
-    let number: String
+    let number: Int
   }
 }
 
@@ -64,7 +64,7 @@ struct PokemonListPage_PokemonCard_Previews: PreviewProvider {
       viewState: .init(
         url: "image_0",
         name: "Pokémon Name",
-        number: "1")
+        number: 1)
     )
     .previewLayout(PreviewLayout.sizeThatFits)
   }

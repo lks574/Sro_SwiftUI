@@ -16,7 +16,11 @@ public struct PokemonListPage {
 
 extension PokemonListPage {
   private var pokemonComponentViewState: PokemonComponent.ViewState {
-    .init(cards: .serialized(rawValue: viewStore.results))
+    .init(cards: .serialized(rawValue: viewStore.pokeList))
+  }
+
+  private var pokemonComponentViewAction: PokemonComponent.ViewAction {
+    .init(lastPokeAppear: { viewStore.send(.getPokeList($0)) })
   }
 }
 
@@ -48,17 +52,20 @@ extension PokemonListPage: View {
         viewState: searchViewState,
         viewAction: searchViewAction)
       ScrollView(.vertical, showsIndicators: false) {
-        PokemonComponent(viewState: pokemonComponentViewState)
-          .padding(.vertical, 24)
-          .padding(.horizontal, 12)
-          .background(PokemonColor.Grayscale.White.Color)
-          .cornerRadius(8)
-          .padding(4)
+        PokemonComponent(
+          viewState: pokemonComponentViewState,
+          viewAction: pokemonComponentViewAction
+        )
+        .padding(.vertical, 24)
+        .padding(.horizontal, 12)
+        .background(PokemonColor.Grayscale.White.Color)
+        .cornerRadius(8)
+        .padding(4)
       }
       .background(PokemonColor.Identity.Primary.Color)
     }
     .onAppear {
-      viewStore.send(.getPokeList)
+      viewStore.send(.getPokeList(.zero))
     }
     .customDialog(
       unwrapping: viewStore.binding(\.$route),
@@ -74,10 +81,10 @@ extension PokemonListPage: View {
 
 
 extension [PokemonListPage.PokemonCard.ViewState] {
-  fileprivate static func serialized(rawValue: PokemonRepository.PokemonList?) -> Self {
-    guard let rawValue else { return [] }
-    return rawValue.pokemons.map {
-      .init(url: $0.url, name: $0.name, number: String($0.url.split(separator: "/").last ?? ""))
+  fileprivate static func serialized(rawValue: [PokemonRepository.Pokemon]) -> Self {
+    return rawValue.map {
+      let number = Int(String($0.url.split(separator: "/").last ?? "")) ?? .zero
+      return .init(url: $0.url, name: $0.name, number: number)
     }
   }
 }

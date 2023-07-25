@@ -16,9 +16,10 @@ public struct PokemonListStore: ReducerProtocol {
 
     public init() {}
 
-    var results: PokemonRepository.PokemonList? = .none
     var sortType: PokemonListStore.SortType = .number
-    var offset: PokemonRepository.Request.PokemonList = .init(offset: .zero)
+    var pokeRequest: PokemonRepository.Request.PokemonList = .init(offset: .zero)
+
+    var pokeList: [PokemonRepository.Pokemon] = []
 
     @BindingState var searchText: String = ""
     @BindingState var route: Route? = .none
@@ -30,7 +31,7 @@ public struct PokemonListStore: ReducerProtocol {
     case onTapSearchType
     case onChangeSortType(PokemonListStore.SortType)
 
-    case getPokeList
+    case getPokeList(Int)
     case fetchPokeList(Result<PokemonRepository.PokemonList, ErrorDomain>)
   }
 
@@ -54,15 +55,16 @@ public struct PokemonListStore: ReducerProtocol {
         state.route = .sortCard
         return .none
 
-      case .getPokeList:
-        return env.getPokemonList(state.offset)
+      case let .getPokeList(offset):
+        state.pokeRequest = state.pokeRequest.mutate(offset: offset)
+        return env.getPokemonList(.init(offset: offset))
           .map(Action.fetchPokeList)
           .cancellable(id: CancelID.requestPokemonListID, cancelInFlight: true)
 
       case .fetchPokeList(let res):
         switch res {
         case let .success(response):
-          state.results = response
+          state.pokeList = state.pokeList + response.pokemons
           return .none
         case let .failure(error):
           return .none
@@ -85,5 +87,11 @@ extension PokemonListStore {
   public enum SortType: Equatable {
     case number
     case name
+  }
+}
+
+extension PokemonRepository.Request.PokemonList {
+  fileprivate func mutate(offset: Int) -> Self {
+    .init(offset: offset, limit: limit)
   }
 }

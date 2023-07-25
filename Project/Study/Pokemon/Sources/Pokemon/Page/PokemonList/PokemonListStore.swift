@@ -17,12 +17,17 @@ public struct PokemonListStore: ReducerProtocol {
     public init() {}
 
     var results: PokemonRepository.PokemonList? = .none
+    var sortType: PokemonListStore.SortType = .number
+
     @BindingState var searchText: String = ""
+    @BindingState var route: Route? = .none
   }
 
   public enum Action: Equatable, BindableAction {
     case binding(BindingAction<State>)
-    case onTapSearchType(PokemonListPage.SearchView.SortType)
+    case onRouteClear
+    case onTapSearchType
+    case onChangeSortType(PokemonListStore.SortType)
 
     case getPokeList
     case fetchPokeList(Result<PokemonRepository.PokemonList, ErrorDomain>)
@@ -36,14 +41,22 @@ public struct PokemonListStore: ReducerProtocol {
       case .binding:
         return .none
 
-      case let .onTapSearchType(type):
+      case .onRouteClear:
+        state.route = .none
+        return .none
+
+      case let .onChangeSortType(type):
+        state.sortType = type
+        return .init(value: .onRouteClear)
+
+      case .onTapSearchType:
+        state.route = .sortCard
         return .none
 
       case .getPokeList:
         return env.getPokemonList()
           .map(Action.fetchPokeList)
           .cancellable(id: CancelID.requestPokemonListID, cancelInFlight: true)
-        
 
       case .fetchPokeList(let res):
         switch res {
@@ -62,5 +75,14 @@ extension PokemonListStore {
   private enum CancelID: Equatable, CaseIterable {
     case teardown
     case requestPokemonListID
+  }
+
+  enum Route: Equatable {
+    case sortCard
+  }
+
+  public enum SortType: Equatable {
+    case number
+    case name
   }
 }

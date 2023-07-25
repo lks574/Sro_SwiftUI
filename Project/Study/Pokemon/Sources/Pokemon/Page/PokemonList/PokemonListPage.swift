@@ -2,6 +2,7 @@ import SwiftUI
 import ComposableArchitecture
 import DesignSystem
 import Domain
+import Architecture
 
 public struct PokemonListPage {
   private let store: StoreOf<PokemonListStore>
@@ -21,11 +22,21 @@ extension PokemonListPage {
 
 extension PokemonListPage {
   private var searchViewState: SearchView.ViewState {
-    .init(sortType: .name, searchText: viewStore.$searchText)
+    .init(sortType: viewStore.sortType, searchText: viewStore.$searchText)
   }
 
   private var searchViewAction: SearchView.ViewAction {
-    .init(typeAction: { viewStore.send(.onTapSearchType($0)) })
+    .init(typeAction: { viewStore.send(.onTapSearchType) })
+  }
+}
+
+extension PokemonListPage {
+  private var sortCardViewState: SortCardDialog.ViewState {
+    .init(sortType: viewStore.sortType)
+  }
+
+  private var sortCardViewAction: SortCardDialog.ViewAction {
+    .init(sortAction: { viewStore.send(.onChangeSortType($0)) })
   }
 }
 
@@ -48,6 +59,15 @@ extension PokemonListPage: View {
     }
     .onAppear {
       viewStore.send(.getPokeList)
+    }
+    .customDialog(
+      unwrapping: viewStore.binding(\.$route),
+      case: /PokemonListStore.Route.sortCard,
+      cornerRadius: 10)
+    { _ in
+      PokemonListPage.SortCardDialog(
+        viewState: sortCardViewState,
+        viewAction: sortCardViewAction)
     }
   }
 }

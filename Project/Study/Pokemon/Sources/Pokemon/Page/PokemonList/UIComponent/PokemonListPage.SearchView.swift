@@ -15,7 +15,7 @@ extension PokemonListPage.SearchView {
       && lhs.searchText == rhs.searchText
     }
 
-    let sortType: SortType
+    let sortType: PokemonListStore.SortType
     @Binding var searchText: String
 
 
@@ -28,12 +28,7 @@ extension PokemonListPage.SearchView {
   }
 
   public struct ViewAction {
-    let typeAction: (SortType) -> Void
-  }
-
-  public enum SortType {
-    case number
-    case name
+    let typeAction: () -> Void
   }
 }
 
@@ -73,7 +68,7 @@ extension PokemonListPage.SearchView: View {
         .clipShape(Capsule())
         .shadow(color: .black.opacity(0.2), radius: 1.5, x: 0, y: 1)
 
-        Button(action: { viewAction.typeAction(viewState.sortType) }) {
+        Button(action: viewAction.typeAction) {
           Image(viewState.searchImage, bundle: .module)
             .resizable()
             .frame(width: 16, height: 16)
@@ -96,7 +91,7 @@ struct PokemonListPage_SearchView_Previews: PreviewProvider {
         sortType: .number,
         searchText: .constant("")),
       viewAction: .init(
-        typeAction: { _ in })
+        typeAction: { })
     )
     .previewLayout(PreviewLayout.sizeThatFits)
   }

@@ -11,9 +11,9 @@ public struct PokemonUseCase {
 }
 
 extension PokemonUseCase: Domain.PokemonUseCase {
-  public var pokeList: () async -> Result<Domain.PokemonRepository.PokemonList, Domain.ErrorDomain> {
+  public var pokeList: (PokemonRepository.Request.PokemonList) async -> Result<Domain.PokemonRepository.PokemonList, Domain.ErrorDomain> {
     {
-      await endPointBuilder.fetch(method: .get, path: "api/v2/pokemon")
+      await endPointBuilder.fetch(method: .get, path: "api/v2/pokemon", body: $0)
     }
   }
 }

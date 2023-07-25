@@ -18,6 +18,7 @@ public struct PokemonListStore: ReducerProtocol {
 
     var results: PokemonRepository.PokemonList? = .none
     var sortType: PokemonListStore.SortType = .number
+    var offset: PokemonRepository.Request.PokemonList = .init(offset: .zero)
 
     @BindingState var searchText: String = ""
     @BindingState var route: Route? = .none
@@ -54,7 +55,7 @@ public struct PokemonListStore: ReducerProtocol {
         return .none
 
       case .getPokeList:
-        return env.getPokemonList()
+        return env.getPokemonList(state.offset)
           .map(Action.fetchPokeList)
           .cancellable(id: CancelID.requestPokemonListID, cancelInFlight: true)
 

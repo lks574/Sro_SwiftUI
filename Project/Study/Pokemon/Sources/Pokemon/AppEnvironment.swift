@@ -9,7 +9,11 @@ public struct AppEnvironment {
 
 extension AppEnvironment: TestDependencyKey {
   static public var liveValue: AppEnvironment = .init(
-    pokemonUseCase: PokemonUseCaseMock())
+    pokemonUseCase: Platform.PokemonUseCase(
+      endPointBuilder: EndpointBuilder(
+        baseURL: "https://pokeapi.co/")
+    )
+  )
 
   public static var testValue: AppEnvironment = .init(
     pokemonUseCase: PokemonUseCaseMock())
@@ -17,10 +21,7 @@ extension AppEnvironment: TestDependencyKey {
 
 extension AppEnvironment: DependencyKey {
   static public var previewValue: AppEnvironment = .init(
-    pokemonUseCase: Platform.PokemonUseCase(
-      endPointBuilder: EndpointBuilder(
-        baseURL: "https://pokeapi.co/")
-    )
+    pokemonUseCase: PokemonUseCaseMock()
   )
 }
 

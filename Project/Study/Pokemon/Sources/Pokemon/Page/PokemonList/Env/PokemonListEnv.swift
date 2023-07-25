@@ -14,9 +14,9 @@ public struct PokemonListEnv {
 }
 
 extension PokemonListEnv {
-  public var getPokemonList: () -> EffectTask<Result<PokemonRepository.PokemonList, ErrorDomain>> {
-    {
-      .task { await appEnvironment.pokemonUseCase.pokeList() }
+  public var getPokemonList: (PokemonRepository.Request.PokemonList) -> EffectTask<Result<PokemonRepository.PokemonList, ErrorDomain>> {
+    { req in
+      .task { await appEnvironment.pokemonUseCase.pokeList(req) }
     }
   }
 }

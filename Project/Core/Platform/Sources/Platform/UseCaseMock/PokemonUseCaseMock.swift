@@ -28,8 +28,8 @@ extension PokemonUseCaseMock {
 }
 
 extension PokemonUseCaseMock: Domain.PokemonUseCase {
-  public var pokeList: () async -> Result<Domain.PokemonRepository.PokemonList, Domain.ErrorDomain> {
-    {
+  public var pokeList: (PokemonRepository.Request.PokemonList) async -> Result<Domain.PokemonRepository.PokemonList, Domain.ErrorDomain> {
+    { _ in
       switch self.type {
       case .success: return .success(self.response.pokeList)
       case .failure(let error): return .failure(error)

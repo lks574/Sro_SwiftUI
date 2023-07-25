@@ -11,7 +11,7 @@ extension PokemonListPage {
   }
 }
 
-extension PokemonListPage.PokemonComponent {
+extension PokemonListPage.PokemonComponent: Equatable {
   public struct ViewState: Equatable {
     public let cards: [PokemonListPage.PokemonCard.ViewState]
 

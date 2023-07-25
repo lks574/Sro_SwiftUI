@@ -13,12 +13,16 @@ extension PokemonListPage {
   }
 }
 
-extension PokemonListPage.SortCardDialog {
+extension PokemonListPage.SortCardDialog: Equatable {
   public struct ViewState: Equatable {
     let sortType: PokemonListStore.SortType
   }
 
-  public struct ViewAction {
+  public struct ViewAction: Equatable {
+    public static func == (lhs: Self, rhs: Self) -> Bool {
+      true
+    }
+
     let sortAction: (PokemonListStore.SortType) -> Void
   }
 }

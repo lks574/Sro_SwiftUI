@@ -8,7 +8,7 @@ extension PokemonListPage {
   }
 }
 
-extension PokemonListPage.SearchView {
+extension PokemonListPage.SearchView: Equatable {
   public struct ViewState: Equatable {
     public static func == (lhs: Self, rhs: Self) -> Bool {
       lhs.sortType == rhs.sortType
@@ -27,7 +27,11 @@ extension PokemonListPage.SearchView {
     }
   }
 
-  public struct ViewAction {
+  public struct ViewAction: Equatable {
+    public static func == (lhs: Self, rhs: Self) -> Bool {
+      true
+    }
+
     let typeAction: () -> Void
   }
 }

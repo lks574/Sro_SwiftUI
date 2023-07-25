@@ -12,11 +12,22 @@ let package = Package(
             name: "Architecture",
             targets: ["Architecture"]),
     ],
+    dependencies: [
+      .package(
+        url: "https://github.com/pointfreeco/swift-composable-architecture",
+        .upToNextMajor(from: "0.56.0")),
+      .package(path: "../DesignSystem"),
+    ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "Architecture"),
+            name: "Architecture",
+            dependencies: [
+              .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+              "DesignSystem",
+            ]
+        ),
         .testTarget(
             name: "ArchitectureTests",
             dependencies: ["Architecture"]),

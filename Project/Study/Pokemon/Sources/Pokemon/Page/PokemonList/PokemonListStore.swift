@@ -9,7 +9,7 @@ public struct PokemonListStore: ReducerProtocol {
   public init() { }
 
   private var env: PokemonListEnv {
-    .init(pokemonUseCase: appEnvironment.pokemonUseCase)
+    .init(appEnvironment: appEnvironment)
   }
 
   public struct State: Equatable {

@@ -4,19 +4,19 @@ import Foundation
 
 public struct PokemonListEnv {
   public init(
-    pokemonUseCase: PokemonUseCase)
+    appEnvironment: AppEnvironment)
   {
-    self.pokemonUseCase = pokemonUseCase
+    self.appEnvironment = appEnvironment
   }
 
   public let mainQueue: AnySchedulerOf<DispatchQueue> = .main
-  public let pokemonUseCase: PokemonUseCase
+  public let appEnvironment: AppEnvironment
 }
 
 extension PokemonListEnv {
   public var getPokemonList: () -> EffectTask<Result<PokemonRepository.PokemonList, ErrorDomain>> {
     {
-      .task { await pokemonUseCase.pokeList() }
+      .task { await appEnvironment.pokemonUseCase.pokeList() }
     }
   }
 }

@@ -19,7 +19,9 @@ public struct PokemonDetailStore: ReducerProtocol {
 
   public enum Action: Equatable, BindableAction {
     case binding(BindingAction<State>)
-
+    case onRouteBack
+    case onRouteLeft
+    case onRouteRight
     case getPoke
   }
 
@@ -29,6 +31,16 @@ public struct PokemonDetailStore: ReducerProtocol {
       switch action {
       case .binding:
         return .none
+
+      case .onRouteBack:
+        return .none
+
+      case .onRouteLeft:
+        return .none
+
+      case .onRouteRight:
+        return .none
+
       case .getPoke:
         return .none
       }

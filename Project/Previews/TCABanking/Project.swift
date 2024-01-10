@@ -2,10 +2,10 @@ import ProjectDescription
 import ProjectDescriptionHelpers
 
 let project: Project = .previewProject(
-  projectName: "OpenArt",
+  projectName: "TCABanking",
   packages: [
-    .local(path: "../../Study/OpenArt"),
+    .local(path: "../../Study/TCABanking"),
   ],
   dependencies: [
-    .package(product: "OpenArt"),
+    .package(product: "TCABanking"),
   ])

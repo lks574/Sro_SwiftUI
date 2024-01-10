@@ -25,7 +25,7 @@ let project: Project = .init(
     .local(path: "../Core/Platform"),
     .local(path: "../Core/DesignSystem"),
     .local(path: "../Core/Functor"),
-    .local(path: "../Study/OpenArt"),
+    .local(path: "../Study/TCABanking"),
     .local(path: "../Study/Pokemon"),
   ],
   settings: .settings(),
@@ -40,13 +40,13 @@ extension [TargetDependency] {
       .package(product: "Platform"),
       .package(product: "DesignSystem"),
       .package(product: "Functor"),
-      .package(product: "OpenArt"),
+      .package(product: "TCABanking"),
       .package(product: "Pokemon"),
     ]
   }
 }
 
-var defaultInfoValue: [String: InfoPlist.Value] {
+var defaultInfoValue: [String: Plist.Value] {
   [
     "CFBundleDevelopmentRegion": .string("$(DEVELOPMENT_LANGUAGE)"),
     "CFBundleDisplayName": .string("${PRODUCT_NAME}"),

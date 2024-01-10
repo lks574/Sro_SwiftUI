@@ -71,7 +71,7 @@ extension Project {
   }
 }
 
-var defaultInfoValue: [String: InfoPlist.Value] {
+var defaultInfoValue: [String: Plist.Value] {
   [
     "CFBundleDevelopmentRegion": .string("$(DEVELOPMENT_LANGUAGE)"),
     "CFBundleDisplayName": .string("${PRODUCT_NAME}"),

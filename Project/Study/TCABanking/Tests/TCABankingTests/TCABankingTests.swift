@@ -1,9 +1,9 @@
 import XCTest
-@testable import OpenArt
+@testable import TCABanking
 
-final class OpenArtTests: XCTestCase {
+final class TCABankingTests: XCTestCase {
     func testExample() throws {
-        // XCTest Documenation
+        // XCTest Documentation
         // https://developer.apple.com/documentation/xctest
 
         // Defining Test Cases and Test Methods

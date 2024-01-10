@@ -6,6 +6,6 @@ let project: Project = .previewProject(
   packages: [
     .local(path: "../../Study/TCABanking"),
   ],
-  dependencies: [
+  dependencies: [ 
     .package(product: "TCABanking"),
   ])

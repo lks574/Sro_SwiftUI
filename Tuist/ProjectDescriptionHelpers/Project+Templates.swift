@@ -9,16 +9,17 @@ extension Target {
   {
     .init(
       name: "\(projectName)Preview",
-      platform: .iOS,
+      destinations: .iOS,
       product: .app,
       bundleId: "com.sro.sro-swiftui.\(projectName.lowercased()).preview",
-      deploymentTarget: .defaultTarget,
+      deploymentTargets: .iOS("15.0"),
       infoPlist: .extendingDefault(with: defaultInfoValue),
       sources: ["Sources/**"],
       resources: ["Resources/**"],
       scripts: [],
       dependencies: dependencies,
-      settings: .settings())
+      settings: .settings()
+    )
   }
 
   static func previewTestTarget(
@@ -27,15 +28,16 @@ extension Target {
   {
     .init(
       name: "\(projectName)PreviewTests",
-      platform: .iOS,
-      product: .unitTests,
+      destinations: .iOS,
+      product: .uiTests,
       bundleId: "com.sro.sro-swiftui.\(projectName.lowercased()).preview.tests",
-      deploymentTarget: .defaultTarget,
+      deploymentTargets: .iOS("15.0"),
       sources: ["Tests/**"],
       dependencies: [
         .target(name: "\(projectName)Preview"),
       ],
-      settings: .settings())
+      settings: .settings()
+    )
   }
 }
 

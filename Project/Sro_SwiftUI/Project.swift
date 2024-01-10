@@ -4,16 +4,17 @@ import ProjectDescriptionHelpers
 let targets: [Target] = [
   .init(
     name: "Sro-SwiftUI",
-    platform: .iOS,
+    destinations: .iOS,
     product: .app,
     bundleId: "com.sro.sro-swiftui",
-    deploymentTarget: .defaultTarget,
+    deploymentTargets: .iOS("15.0"),
     infoPlist: .extendingDefault(with: defaultInfoValue),
     sources: ["Sources/**"],
     resources: ["Resources/**"],
     scripts: [],
     dependencies: .default,
-    settings: .settings()),
+    settings: .settings()
+  )
 ]
 
 let project: Project = .init(

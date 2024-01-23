@@ -2,7 +2,8 @@ import Foundation
 import ComposableArchitecture
 import Domain
 
-public struct PokemonListStore: ReducerProtocol {
+@Reducer
+public struct PokemonListStore {
 
   @Dependency(\.appEnvironment) var appEnvironment
 
@@ -35,7 +36,7 @@ public struct PokemonListStore: ReducerProtocol {
     case fetchPokeList(Result<PokemonRepository.PokemonList, ErrorDomain>)
   }
 
-  public var body: some ReducerProtocol<State, Action> {
+  public var body: some ReducerOf<Self> {
     BindingReducer()
 
     Reduce { state, action in
@@ -49,7 +50,7 @@ public struct PokemonListStore: ReducerProtocol {
 
       case let .onChangeSortType(type):
         state.sortType = type
-        return .init(value: .onRouteClear)
+        return .run { await $0(.onRouteClear) }
 
       case .onTapSearchType:
         state.route = .sortCard
@@ -66,7 +67,7 @@ public struct PokemonListStore: ReducerProtocol {
         case let .success(response):
           state.pokeList = state.pokeList + response.pokemons
           return .none
-        case let .failure(error):
+        case .failure:
           return .none
         }
       }

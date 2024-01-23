@@ -11,8 +11,9 @@ struct AppMain: App {
         PokemonListPage(
           store: .init(
             initialState: PokemonListStore.State(),
-            reducer: PokemonListStore()
-          )
+            reducer: {
+              PokemonListStore()
+            })
         )
       }
     }

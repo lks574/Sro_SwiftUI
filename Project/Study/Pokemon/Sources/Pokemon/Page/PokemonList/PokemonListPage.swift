@@ -10,7 +10,7 @@ public struct PokemonListPage {
 
   public init(store: StoreOf<PokemonListStore>) {
     self.store = store
-    viewStore = ViewStore(store)
+    viewStore = ViewStore(store, observe: { $0 })
   }
 }
 
@@ -68,7 +68,7 @@ extension PokemonListPage: View {
       viewStore.send(.getPokeList(.zero))
     }
     .customDialog(
-      unwrapping: viewStore.binding(\.$route),
+      unwrapping: viewStore.$route,
       case: /PokemonListStore.Route.sortCard,
       cornerRadius: 10)
     { _ in
@@ -94,8 +94,9 @@ struct PokemonListPage_Previews: PreviewProvider {
     PokemonListPage(
       store: .init(
         initialState: PokemonListStore.State(),
-        reducer: PokemonListStore()
-      )
+        reducer: {
+          PokemonListStore()
+        })
     )
   }
 }

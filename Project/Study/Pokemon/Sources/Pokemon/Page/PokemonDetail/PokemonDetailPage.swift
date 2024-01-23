@@ -9,7 +9,7 @@ public struct PokemonDetailPage {
 
   public init(store: StoreOf<PokemonDetailStore>) {
     self.store = store
-    viewStore = ViewStore(store)
+    viewStore = ViewStore(store, observe: { $0 })
   }
 }
 
@@ -56,8 +56,9 @@ struct PokemonDetailPagee_Previews: PreviewProvider {
     PokemonDetailPage(
       store: .init(
         initialState: PokemonDetailStore.State(),
-        reducer: PokemonDetailStore()
-      )
+        reducer: {
+          PokemonDetailStore()
+        })
     )
   }
 }

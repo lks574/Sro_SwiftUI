@@ -2,7 +2,8 @@ import Foundation
 import ComposableArchitecture
 import Domain
 
-public struct PokemonDetailStore: ReducerProtocol {
+@Reducer
+public struct PokemonDetailStore {
 
   @Dependency(\.appEnvironment) var appEnvironment
 
@@ -25,7 +26,7 @@ public struct PokemonDetailStore: ReducerProtocol {
     case getPoke
   }
 
-  public var body: some ReducerProtocol<State, Action> {
+  public var body: some ReducerOf<Self> {
     BindingReducer()
     Reduce { state, action in
       switch action {

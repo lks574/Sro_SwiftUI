@@ -2,18 +2,18 @@ import Foundation
 import ComposableArchitecture
 
 @Reducer
-struct SplashStore {
-  init() { }
+public struct SplashStore {
+  public init() { }
 
-  struct State: Equatable {
-
+  public struct State: Equatable {
+    public init() { }
   }
 
-  enum Action: Equatable, BindableAction {
+  public enum Action: Equatable, BindableAction {
     case binding(BindingAction<State>)
   }
 
-  var body: some ReducerOf<Self> {
+  public var body: some ReducerOf<Self> {
     BindingReducer()
     Reduce { state, action in
       switch action {

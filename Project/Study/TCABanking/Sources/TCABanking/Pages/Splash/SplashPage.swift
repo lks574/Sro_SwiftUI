@@ -1,7 +1,7 @@
 import SwiftUI
 import ComposableArchitecture
 
-struct SplashPage {
+public struct SplashPage {
   private let store: StoreOf<SplashStore>
   @ObservedObject private var viewStore: ViewStoreOf<SplashStore>
 
@@ -14,7 +14,7 @@ struct SplashPage {
 }
 
 extension SplashPage: View {
-  var body: some View {
+  public var body: some View {
     VStack {
       Spacer()
       VStack(spacing: 9) {

@@ -1,4 +1,5 @@
 import SwiftUI
+import TCABanking
 
 @main
 struct AppMain: App {

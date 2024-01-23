@@ -6,7 +6,13 @@ struct AppMain: App {
   var body: some Scene {
     WindowGroup {
       NavigationView {
-        Text("123123")
+        SplashPage(
+          store: .init(
+            initialState: SplashStore.State(),
+            reducer: {
+              SplashStore()
+            })
+        )
       }
     }
   }

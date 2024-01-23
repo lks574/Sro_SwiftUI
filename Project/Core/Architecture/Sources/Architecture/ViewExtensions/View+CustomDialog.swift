@@ -19,7 +19,7 @@ extension View {
 
   public func customDialog<Enum, Case>(
     unwrapping enum: Binding<Enum?>,
-    case casePath: CasePath<Enum, Case>,
+    case casePath: AnyCasePath<Enum, Case>,
     cornerRadius: CGFloat,
     @ViewBuilder content: @escaping (Binding<Case>) -> some View)
     -> some View

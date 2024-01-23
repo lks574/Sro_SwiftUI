@@ -1,4 +1,5 @@
 import SwiftUI
+import SwiftUINavigation
 import ComposableArchitecture
 
 public struct SplashPage {
@@ -10,6 +11,15 @@ public struct SplashPage {
   public init(store: StoreOf<SplashStore>) {
     self.store = store
     viewStore = ViewStore(store, observe: { $0 })
+  }
+}
+
+extension SplashPage {
+  @CasePathable
+  enum Destination {
+    case onBoarding
+    case login
+    case home
   }
 }
 
@@ -26,7 +36,6 @@ extension SplashPage: View {
           .fontWeight(.semibold)
           .foregroundColor(theme.colors.primaryText)
       }
-
 
       Spacer()
     }

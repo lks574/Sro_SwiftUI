@@ -21,6 +21,7 @@ let package = Package(
     .package(
       url: "https://github.com/pointfreeco/swift-composable-architecture",
       .upToNextMajor(from: "1.6.0")),
+    .package(url: "https://github.com/pointfreeco/swiftui-navigation.git", from: "1.2.0"),
   ],
   targets: [
     // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -34,6 +35,7 @@ let package = Package(
         "DesignSystem",
         "Functor",
         .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+        .product(name: "SwiftUINavigation", package: "swiftui-navigation"),
       ]
     ),
     .testTarget(

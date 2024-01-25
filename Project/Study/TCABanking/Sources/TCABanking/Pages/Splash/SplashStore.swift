@@ -9,10 +9,8 @@ public struct SplashStore {
     public init() { }
 
     @CasePathable
-    enum Destination {
+    enum Destination: Equatable {
       case onBoarding
-      case login
-      case home
     }
 
     @BindingState var destination: Destination?

@@ -36,7 +36,7 @@ extension SplashPage: View {
     }
     .frame(maxWidth: .infinity)
     .background(theme.colors.background)
-    .navigationDestination(unwrapping: viewStore.$destination) { _ in
+    .navigationDestination(unwrapping: viewStore.$destination.onBoarding) { _ in
       OnBoardingPage(
         store: .init(
           initialState: OnBoardingStore.State(),

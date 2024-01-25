@@ -1,4 +1,5 @@
 import SwiftUI
+import SwiftUINavigation
 import ComposableArchitecture
 
 public struct OnBoardingPage {
@@ -65,6 +66,9 @@ extension OnBoardingPage: View {
     .animation(.easeInOut(duration: 0.2), value: viewStore.selectedItem)
     .background(theme.colors.background)
     .toolbar(.hidden, for: .navigationBar)
+    .navigationDestination(unwrapping: viewStore.$destination.signIn) { _ in
+
+    }
   }
 }
 

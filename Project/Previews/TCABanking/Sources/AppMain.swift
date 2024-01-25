@@ -6,7 +6,7 @@ struct AppMain: App {
 
   var body: some Scene {
     WindowGroup {
-      NavigationView {
+      NavigationStack {
         SplashPage(
           store: .init(
             initialState: SplashStore.State(),

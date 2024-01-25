@@ -2,25 +2,19 @@ import Foundation
 import ComposableArchitecture
 
 @Reducer
-public struct SplashStore {
+public struct OnBoardingStore {
   public init() { }
 
   public struct State: Equatable {
     public init() { }
 
-    @CasePathable
-    enum Destination {
-      case onBoarding
-      case login
-      case home
-    }
-
-    @BindingState var destination: Destination?
+    @BindingState var selectedItem: Int = .zero
+    var onBoardingList: [OnBoardingPage.TabModel] = .onBoardings
   }
 
   public enum Action: Equatable, BindableAction {
     case binding(BindingAction<State>)
-    case moveToOnboarding
+    case onTabNext
   }
 
   public var body: some ReducerOf<Self> {
@@ -30,8 +24,12 @@ public struct SplashStore {
       case .binding:
         return .none
 
-      case .moveToOnboarding:
-        state.destination = .onBoarding
+      case .onTabNext:
+        if state.selectedItem >= state.onBoardingList.count - 1 {
+
+        } else {
+          state.selectedItem += 1
+        }
         return .none
       }
     }

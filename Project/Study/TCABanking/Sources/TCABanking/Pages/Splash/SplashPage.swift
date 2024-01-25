@@ -14,15 +14,6 @@ public struct SplashPage {
   }
 }
 
-extension SplashPage {
-  @CasePathable
-  enum Destination {
-    case onBoarding
-    case login
-    case home
-  }
-}
-
 extension SplashPage: View {
   public var body: some View {
     VStack {
@@ -38,9 +29,22 @@ extension SplashPage: View {
       }
 
       Spacer()
+
+      Button(action: { viewStore.send(.moveToOnboarding) }) {
+        Text("Onboarding")
+      }
     }
     .frame(maxWidth: .infinity)
     .background(theme.colors.background)
+    .navigationDestination(unwrapping: viewStore.$destination) { _ in
+      OnBoardingPage(
+        store: .init(
+          initialState: OnBoardingStore.State(),
+          reducer: {
+            OnBoardingStore()
+          })
+      )
+    }
   }
 }
 

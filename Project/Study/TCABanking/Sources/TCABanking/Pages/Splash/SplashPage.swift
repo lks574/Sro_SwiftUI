@@ -37,24 +37,7 @@ extension SplashPage: View {
     .frame(maxWidth: .infinity)
     .background(theme.colors.background)
     .navigationDestination(unwrapping: viewStore.$destination.onBoarding) { _ in
-      OnBoardingPage(
-        store: .init(
-          initialState: OnBoardingStore.State(),
-          reducer: {
-            OnBoardingStore()
-          })
-      )
+      Routing.Builder.onBoarding()
     }
   }
 }
-
-#Preview {
-  SplashPage(
-    store: .init(
-      initialState: SplashStore.State(),
-      reducer: {
-        SplashStore()
-      })
-  )
-}
-

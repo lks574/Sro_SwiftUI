@@ -8,14 +8,9 @@ public struct SignInStore {
   public struct State: Equatable {
     public init() { }
 
-    @CasePathable
-    enum Destination {
-      case signUp
-    }
-
     @BindingState var email: String = ""
     @BindingState var password: String = ""
-    @BindingState var destination: Destination?
+    @BindingState var destination: Routing.Destination?
 
     var isShowPassword: Bool = false
   }

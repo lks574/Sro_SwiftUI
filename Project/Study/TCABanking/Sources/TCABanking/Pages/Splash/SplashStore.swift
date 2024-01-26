@@ -8,12 +8,7 @@ public struct SplashStore {
   public struct State: Equatable {
     public init() { }
 
-    @CasePathable
-    enum Destination: Equatable {
-      case onBoarding
-    }
-
-    @BindingState var destination: Destination?
+    @BindingState var destination: Routing.Destination?
   }
 
   public enum Action: Equatable, BindableAction {

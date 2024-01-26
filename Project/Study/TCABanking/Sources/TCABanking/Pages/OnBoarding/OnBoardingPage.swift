@@ -67,23 +67,7 @@ extension OnBoardingPage: View {
     .background(theme.colors.background)
     .toolbar(.hidden, for: .navigationBar)
     .navigationDestination(unwrapping: viewStore.$destination.signIn) { _ in
-      SignInPage(
-        store: .init(
-          initialState: SignInStore.State(),
-          reducer: {
-            SignInStore()
-          })
-      )
+      Routing.Builder.signIn()
     }
   }
-}
-
-#Preview {
-  OnBoardingPage(
-    store: .init(
-      initialState: OnBoardingStore.State(),
-      reducer: {
-        OnBoardingStore()
-      })
-  )
 }

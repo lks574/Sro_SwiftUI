@@ -8,12 +8,7 @@ public struct OnBoardingStore {
   public struct State: Equatable {
     public init() { }
 
-    @CasePathable
-    enum Destination {
-      case signIn
-    }
-
-    @BindingState var destination: Destination?
+    @BindingState var destination: Routing.Destination?
     @BindingState var selectedItem: Int = .zero
     var onBoardingList: [OnBoardingPage.TabModel] = .onBoardings
   }

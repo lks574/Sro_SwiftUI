@@ -72,13 +72,7 @@ extension SignInPage: View {
     }
     .toolbar(.hidden, for: .navigationBar)
     .navigationDestination(unwrapping: viewStore.$destination.signUp) { _ in
-      SignUpPage(
-        store: .init(
-          initialState: SignUpStore.State(),
-          reducer: {
-            SignUpStore()
-          })
-      )
+      Routing.Builder.signUp()
     }
   }
 }

@@ -12,7 +12,7 @@ extension Target {
       destinations: .iOS,
       product: .app,
       bundleId: "com.sro.sro-swiftui.\(projectName.lowercased()).preview",
-      deploymentTargets: .iOS("15.0"),
+      deploymentTargets: .iOS("17.0"),
       infoPlist: .extendingDefault(with: defaultInfoValue),
       sources: ["Sources/**"],
       resources: ["Resources/**"],

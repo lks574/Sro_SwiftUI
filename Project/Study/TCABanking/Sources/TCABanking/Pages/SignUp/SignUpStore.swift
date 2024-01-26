@@ -2,20 +2,16 @@ import Foundation
 import ComposableArchitecture
 
 @Reducer
-public struct SignInStore {
+public struct SignUpStore {
   public init() { }
 
   public struct State: Equatable {
     public init() { }
 
-    @CasePathable
-    enum Destination {
-      case signUp
-    }
-
+    @BindingState var name: String = ""
+    @BindingState var phone: String = ""
     @BindingState var email: String = ""
     @BindingState var password: String = ""
-    @BindingState var destination: Destination?
 
     var isShowPassword: Bool = false
   }
@@ -34,6 +30,7 @@ public struct SignInStore {
       case .binding(\.$password):
         state.isShowPassword = false
         return .none
+
       case .binding:
         return .none
 
@@ -41,7 +38,6 @@ public struct SignInStore {
         return .none
 
       case .onTapSignUp:
-        state.destination = .signUp
         return .none
 
       case .onTapPasswordShow:

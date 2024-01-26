@@ -24,7 +24,7 @@ extension InputTextField: View {
         .frame(maxWidth: .infinity, alignment: .leading)
 
       HStack(spacing: 16) {
-        Image(viewState.image)
+        Image(systemName: viewState.image)
           .foregroundStyle(theme.colors.secondText)
 
         TextField(text: viewState.bindingString) {

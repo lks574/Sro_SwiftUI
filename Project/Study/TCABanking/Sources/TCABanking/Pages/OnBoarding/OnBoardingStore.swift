@@ -32,7 +32,7 @@ public struct OnBoardingStore {
 
       case .onTabNext:
         if state.selectedItem >= state.onBoardingList.count - 1 {
-
+          state.destination = .signIn
         } else {
           state.selectedItem += 1
         }

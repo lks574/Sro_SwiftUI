@@ -9,6 +9,7 @@ struct Theme {
     let primary = Color("primary")
     let primaryText = Color("primaryText")
     let secondText = Color("secondText")
+    let separator = Color("separator")
   }
 }
 

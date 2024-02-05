@@ -2,15 +2,17 @@ import SwiftUI
 import SwiftUINavigation
 import ComposableArchitecture
 
+@ViewAction(for: SignInStore.self)
 public struct SignInPage {
-  private let store: StoreOf<SignInStore>
-  @ObservedObject private var viewStore: ViewStoreOf<SignInStore>
+  
+  @Bindable
+  public var store: StoreOf<SignInStore>
 
-  @Environment(\.theme) private var theme
+  @Environment(\.theme)
+  private var theme
 
   public init(store: StoreOf<SignInStore>) {
     self.store = store
-    viewStore = ViewStore(store, observe: { $0 })
   }
 }
 
@@ -30,21 +32,21 @@ extension SignInPage: View {
               title: "Email Address",
               image: "envelope",
               hint: "email",
-              bindingString: viewStore.$email)
+              bindingString: $store.email)
           )
           SecureInputTextField(
             viewState: .init(
               title: "Password",
               image: "lock",
               hint: "password",
-              isShowPassword: viewStore.isShowPassword,
-              onTapShowPassword: { viewStore.send(.onTapPasswordShow) },
-              bindingString: viewStore.$password)
+              isShowPassword: store.isShowPassword,
+              onTapShowPassword: { send(.onTapPasswordShow) },
+              bindingString: $store.password)
           )
         }
 
         VStack(spacing: 30) {
-          Button(action: { viewStore.send(.onTapSignIn) }) {
+          Button(action: { send(.onTapSignIn) }) {
             Text("Sign In")
               .font(.system(size: 16))
               .fontWeight(.semibold)
@@ -59,7 +61,7 @@ extension SignInPage: View {
               .font(.system(size: 14))
               .foregroundStyle(theme.colors.secondText)
 
-            Button(action: { viewStore.send(.onTapSignUp) }) {
+            Button(action: { send(.onTapSignUp) }) {
               Text("Sign Up")
                 .font(.system(size: 14))
                 .foregroundStyle(theme.colors.primary)
@@ -71,7 +73,7 @@ extension SignInPage: View {
       .padding(.vertical, 50)
     }
     .toolbar(.hidden, for: .navigationBar)
-    .navigationDestination(unwrapping: viewStore.$destination.signUp) { _ in
+    .navigationDestination(unwrapping: $store.destination.signUp) { _ in
       Routing.Builder.signUp()
     }
   }

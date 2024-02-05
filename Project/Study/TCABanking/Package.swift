@@ -20,7 +20,7 @@ let package = Package(
     .package(path: "../../Core/Functor"),
     .package(
       url: "https://github.com/pointfreeco/swift-composable-architecture",
-      .upToNextMajor(from: "1.6.0")),
+      .upToNextMajor(from: "1.7.2")),
     .package(url: "https://github.com/pointfreeco/swiftui-navigation.git", from: "1.2.0"),
   ],
   targets: [

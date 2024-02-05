@@ -1,16 +1,17 @@
 import SwiftUI
 import ComposableArchitecture
 
+@ViewAction(for: SignUpStore.self)
 public struct SignUpPage {
-  private let store: StoreOf<SignUpStore>
-  @ObservedObject private var viewStore: ViewStoreOf<SignUpStore>
+
+  @Bindable
+  public var store: StoreOf<SignUpStore>
 
   @Environment(\.theme) private var theme
   @Environment(\.dismiss) private var dismiss
 
   public init(store: StoreOf<SignUpStore>) {
     self.store = store
-    viewStore = ViewStore(store, observe: { $0 })
   }
 }
 
@@ -30,35 +31,35 @@ extension SignUpPage: View {
               title: "Full Name",
               image: "person",
               hint: "FullName",
-              bindingString: viewStore.$name)
+              bindingString: $store.name)
           )
           InputTextField(
             viewState: .init(
               title: "Phone Number",
               image: "phone",
               hint: "Number",
-              bindingString: viewStore.$phone)
+              bindingString: $store.phone)
           )
           InputTextField(
             viewState: .init(
               title: "Email Address",
               image: "envelope",
               hint: "email",
-              bindingString: viewStore.$email)
+              bindingString: $store.email)
           )
           SecureInputTextField(
             viewState: .init(
               title: "Password",
               image: "lock",
               hint: "password",
-              isShowPassword: viewStore.isShowPassword,
-              onTapShowPassword: { viewStore.send(.onTapPasswordShow) },
-              bindingString: viewStore.$password)
+              isShowPassword: store.isShowPassword,
+              onTapShowPassword: { send(.onTapPasswordShow) },
+              bindingString: $store.password)
           )
         }
 
         VStack(spacing: 30) {
-          Button(action: { viewStore.send(.onTapSignUp) }) {
+          Button(action: { send(.onTapSignUp) }) {
             Text("Sign Up")
               .font(.system(size: 16))
               .fontWeight(.semibold)

@@ -2,15 +2,16 @@ import SwiftUI
 import SwiftUINavigation
 import ComposableArchitecture
 
+@ViewAction(for: OnBoardingStore.self)
 public struct OnBoardingPage {
-  private let store: StoreOf<OnBoardingStore>
-  @ObservedObject private var viewStore: ViewStoreOf<OnBoardingStore>
+  @Bindable
+  public var store: StoreOf<OnBoardingStore>
 
-  @Environment(\.theme) private var theme
+  @Environment(\.theme) 
+  private var theme
 
   public init(store: StoreOf<OnBoardingStore>) {
     self.store = store
-    viewStore = ViewStore(store, observe: { $0 })
   }
 }
 
@@ -39,7 +40,7 @@ extension OnBoardingPage {
       }
       .padding(.bottom, 52)
 
-      Button(action: { viewStore.send(.onTabNext) }) {
+      Button(action: { send(.onTabNext) }) {
         Text("Next")
           .font(.system(size: 16))
           .fontWeight(.semibold)
@@ -56,17 +57,17 @@ extension OnBoardingPage {
 
 extension OnBoardingPage: View {
   public var body: some View {
-    TabView(selection: viewStore.$selectedItem) {
-      ForEach(viewStore.onBoardingList, id: \.id) { tabModel in
+    TabView(selection: $store.selectedItem) {
+      ForEach(store.onBoardingList, id: \.id) { tabModel in
         onBoardingTabView(tabModel: tabModel)
       }
     }
     .frame(maxWidth: .infinity)
     .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-    .animation(.easeInOut(duration: 0.2), value: viewStore.selectedItem)
+    .animation(.easeInOut(duration: 0.2), value: store.selectedItem)
     .background(theme.colors.background)
     .toolbar(.hidden, for: .navigationBar)
-    .navigationDestination(unwrapping: viewStore.$destination.signIn) { _ in
+    .navigationDestination(unwrapping: $store.destination.signIn) { _ in
       Routing.Builder.signIn()
     }
   }

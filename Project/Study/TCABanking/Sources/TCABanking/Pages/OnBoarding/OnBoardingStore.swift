@@ -2,30 +2,35 @@ import Foundation
 import ComposableArchitecture
 
 @Reducer
-public struct OnBoardingStore {
+public struct OnBoardingStore: Sendable {
   public init() { }
 
+  @ObservableState
   public struct State: Equatable {
     public init() { }
 
-    @BindingState var destination: Routing.Destination?
-    @BindingState var selectedItem: Int = .zero
+    var destination: Routing.Destination?
+    var selectedItem: Int = .zero
     var onBoardingList: [OnBoardingPage.TabModel] = .onBoardings
   }
 
-  public enum Action: Equatable, BindableAction {
-    case binding(BindingAction<State>)
-    case onTabNext
+  public enum Action: ViewAction, Sendable{
+    case view(View)
+
+    public enum View: BindableAction, Sendable {
+      case binding(BindingAction<State>)
+      case onTabNext
+    }
+
   }
 
   public var body: some ReducerOf<Self> {
-    BindingReducer()
     Reduce { state, action in
       switch action {
-      case .binding:
+      case .view(.binding):
         return .none
-
-      case .onTabNext:
+        
+      case .view(.onTabNext):
         if state.selectedItem >= state.onBoardingList.count - 1 {
           state.destination = .signIn
         } else {

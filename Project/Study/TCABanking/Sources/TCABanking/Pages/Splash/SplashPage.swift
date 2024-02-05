@@ -2,15 +2,16 @@ import SwiftUI
 import SwiftUINavigation
 import ComposableArchitecture
 
+@ViewAction(for: SplashStore.self)
 public struct SplashPage {
-  private let store: StoreOf<SplashStore>
-  @ObservedObject private var viewStore: ViewStoreOf<SplashStore>
+  @Bindable
+  public var store: StoreOf<SplashStore>
 
-  @Environment(\.theme) private var theme
+  @Environment(\.theme)
+  private var theme
 
   public init(store: StoreOf<SplashStore>) {
     self.store = store
-    viewStore = ViewStore(store, observe: { $0 })
   }
 }
 
@@ -30,13 +31,13 @@ extension SplashPage: View {
 
       Spacer()
 
-      Button(action: { viewStore.send(.moveToOnboarding) }) {
+      Button(action: { send(.moveToOnboarding) }) {
         Text("Onboarding")
       }
     }
     .frame(maxWidth: .infinity)
     .background(theme.colors.background)
-    .navigationDestination(unwrapping: viewStore.$destination.onBoarding) { _ in
+    .navigationDestination(unwrapping: $store.destination.onBoarding) { _ in
       Routing.Builder.onBoarding()
     }
   }

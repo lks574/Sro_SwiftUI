@@ -2,28 +2,33 @@ import Foundation
 import ComposableArchitecture
 
 @Reducer
-public struct SplashStore {
+public struct SplashStore: Sendable {
   public init() { }
 
+  @ObservableState
   public struct State: Equatable {
     public init() { }
 
-    @BindingState var destination: Routing.Destination?
+    var destination: Routing.Destination?
   }
 
-  public enum Action: Equatable, BindableAction {
-    case binding(BindingAction<State>)
-    case moveToOnboarding
+  public enum Action: ViewAction, Sendable {
+    case view(View)
+
+    public enum View: BindableAction, Sendable {
+      case binding(BindingAction<State>)
+      case moveToOnboarding
+    }
   }
 
   public var body: some ReducerOf<Self> {
-    BindingReducer()
+    BindingReducer(action: \.view)
     Reduce { state, action in
       switch action {
-      case .binding:
+      case .view(.binding):
         return .none
 
-      case .moveToOnboarding:
+      case .view(.moveToOnboarding):
         state.destination = .onBoarding
         return .none
       }

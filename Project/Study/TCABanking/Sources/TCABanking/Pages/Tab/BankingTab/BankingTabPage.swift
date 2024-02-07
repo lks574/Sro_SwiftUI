@@ -33,6 +33,9 @@ extension BankingTabPage: View {
         .tag(1)
     }
     .accentColor(theme.colors.primary)
-   
+    .toolbar(.hidden, for: .navigationBar)
+    .onAppear {
+      UITabBar.appearance().backgroundColor = UIColor(theme.colors.tabBackground)
+    }
   }
 }

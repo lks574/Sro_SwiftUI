@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "logo_grocery.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

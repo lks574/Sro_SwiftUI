@@ -40,9 +40,5 @@ extension SplashPage: View {
     .navigationDestination(unwrapping: $store.destination.onBoarding) { _ in
       Routing.Builder.onBoarding()
     }
-    .onAppear {
-      UITabBar.appearance().barTintColor = UIColor(theme.colors.secondText)
-      UITabBar.appearance().backgroundColor = UIColor(theme.colors.tabBackground)
-    }
   }
 }

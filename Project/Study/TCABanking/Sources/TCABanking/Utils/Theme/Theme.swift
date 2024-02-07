@@ -5,11 +5,12 @@ struct Theme {
   let colors = Colors()
 
   struct Colors {
-    let background = Color("background")
-    let primary = Color("primary")
-    let primaryText = Color("primaryText")
-    let secondText = Color("secondText")
-    let separator = Color("separator")
+    let background = Color("background", bundle: .module)
+    let primary = Color("primary", bundle: .module)
+    let primaryText = Color("primaryText", bundle: .module)
+    let secondText = Color("secondText", bundle: .module)
+    let separator = Color("separator", bundle: .module)
+    let tabBackground = Color("tabBackground", bundle: .module)
   }
 }
 

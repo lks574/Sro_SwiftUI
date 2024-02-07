@@ -20,7 +20,7 @@ extension SplashPage: View {
     VStack {
       Spacer()
       VStack(spacing: 9) {
-        Image("Logo_m")
+        Image("Logo_m", bundle: .module)
           .resizable()
           .frame(width: 80, height: 80)
         Text("BANKPICK")
@@ -39,6 +39,10 @@ extension SplashPage: View {
     .background(theme.colors.background)
     .navigationDestination(unwrapping: $store.destination.onBoarding) { _ in
       Routing.Builder.onBoarding()
+    }
+    .onAppear {
+      UITabBar.appearance().barTintColor = UIColor(theme.colors.secondText)
+      UITabBar.appearance().backgroundColor = UIColor(theme.colors.tabBackground)
     }
   }
 }

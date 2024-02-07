@@ -39,6 +39,7 @@ public struct SignInStore: Sendable {
         return .none
         
       case .view(.onTapSignIn):
+        state.destination = .tab
         return .none
 
       case .view(.onTapSignUp):

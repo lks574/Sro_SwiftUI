@@ -85,6 +85,7 @@ extension SignUpPage: View {
       .padding(.horizontal, 20)
       .padding(.vertical, 50)
     }
+    .background(theme.colors.background)
     .toolbar(.hidden, for: .navigationBar)
   }
 }

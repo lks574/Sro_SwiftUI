@@ -72,9 +72,13 @@ extension SignInPage: View {
       .padding(.horizontal, 20)
       .padding(.vertical, 50)
     }
+    .background(theme.colors.background)
     .toolbar(.hidden, for: .navigationBar)
     .navigationDestination(unwrapping: $store.destination.signUp) { _ in
       Routing.Builder.signUp()
+    }
+    .navigationDestination(unwrapping: $store.destination.tab) { _ in
+      Routing.Builder.tab()
     }
   }
 }

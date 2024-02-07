@@ -8,6 +8,7 @@ extension Routing {
     case onBoarding
     case signIn
     case signUp
+    case tab
   }
 }
 

@@ -23,7 +23,7 @@ extension OnBoardingPage {
   {
     VStack(spacing: .zero) {
       Spacer()
-      Image(tabModel.image)
+      Image(tabModel.image, bundle: .module)
       Spacer()
       VStack(spacing: 10) {
         Text(tabModel.title)
@@ -52,6 +52,7 @@ extension OnBoardingPage {
       .clipShape(RoundedRectangle(cornerRadius: 16))
     }
     .padding(.horizontal, 20)
+    .background(theme.colors.background)
   }
 }
 

@@ -47,4 +47,34 @@ extension Routing.Builder {
         })
     )
   }
+
+  public static func tab() -> BankingTabPage {
+    .init(
+      store: .init(
+        initialState: BankingTabStore.State(),
+        reducer: {
+          BankingTabStore()
+        })
+    )
+  }
+
+  public static func home() -> HomePage {
+    .init(
+      store: .init(
+        initialState: HomeStore.State(),
+        reducer: {
+          HomeStore()
+        })
+    )
+  }
+
+  public static func myCard() -> MyCardPage {
+    .init(
+      store: .init(
+        initialState: MyCardStore.State(),
+        reducer: {
+          MyCardStore()
+        })
+    )
+  }
 }

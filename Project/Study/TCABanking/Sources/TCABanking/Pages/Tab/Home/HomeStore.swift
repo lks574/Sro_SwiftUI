@@ -10,7 +10,6 @@ public struct HomeStore: Sendable {
     public init() { }
 
     var destination: Routing.Destination?
-    var transactionList: [HomePage.TransactionModel] = .mock
   }
 
   public enum Action: ViewAction, Sendable{

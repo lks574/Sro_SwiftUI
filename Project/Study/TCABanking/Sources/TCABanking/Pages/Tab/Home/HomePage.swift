@@ -49,69 +49,6 @@ extension HomePage {
     }
   }
 
-  private func cardComponent() -> some View {
-    VStack(alignment: .leading, spacing: 28) {
-      HStack {
-        Image(systemName: "memorychip")
-          .foregroundStyle(Color(hex: "#A2A2A7"))
-        Spacer()
-        Image(systemName: "wave.3.right")
-          .foregroundStyle(Color(hex: "#A2A2A7"))
-      }
-      HStack(spacing: 8) {
-        Text("4562")
-          .font(.system(size: 24))
-          .foregroundStyle(Color.white)
-        Spacer()
-        Text("1122")
-          .font(.system(size: 24))
-          .foregroundStyle(Color.white)
-        Spacer()
-        Text("4595")
-          .font(.system(size: 24))
-          .foregroundStyle(Color.white)
-        Spacer()
-        Text("7852")
-          .font(.system(size: 24))
-          .foregroundStyle(Color.white)
-      }
-      .padding(.horizontal, 4)
-
-      Text("AR Jonson")
-        .font(.system(size: 13))
-        .foregroundStyle(Color.white)
-
-      HStack(spacing: 8) {
-        VStack(alignment: .leading, spacing: 8) {
-          Text("Expiry Date")
-            .font(.system(size: 9))
-            .foregroundStyle(Color(hex: "#A2A2A7"))
-          Text("24/2000")
-            .font(.system(size: 13))
-            .foregroundStyle(Color.white)
-        }
-        VStack(alignment: .leading, spacing: 8) {
-          Text("CVV")
-            .font(.system(size: 9))
-            .foregroundStyle(Color(hex: "#A2A2A7"))
-          Text("6986")
-            .font(.system(size: 13))
-            .foregroundStyle(Color.white)
-        }
-        Spacer()
-        Text("MasterCard")
-          .font(.system(size: 13))
-          .foregroundStyle(Color.white)
-      }
-    }
-    .padding(20)
-    .background(Color(hex: "#25253D"))
-    .overlay {
-      Image("worldmap_card", bundle: .module)
-    }
-    .clipShape(RoundedRectangle(cornerRadius: 25))
-  }
-
   private func buttonGroupComponent() -> some View {
     HStack {
       Button(action: { send(.onTapSent) }) {
@@ -185,28 +122,8 @@ extension HomePage {
       }
 
       LazyVStack {
-        ForEach(store.transactionList, id: \.id) { item in
-          HStack(spacing: 16) {
-            Image(item.imageURL, bundle: .module)
-              .frame(width: 42, height: 42)
-              .foregroundStyle(theme.colors.primaryText)
-              .background(theme.colors.tabBackground)
-              .clipShape(Circle())
-            VStack(alignment: .leading, spacing: .zero) {
-              Text(item.title)
-                .font(.system(size: 16))
-                .fontWeight(.medium)
-                .foregroundStyle(theme.colors.primaryText)
-              Text(item.category)
-                .font(.system(size: 12))
-                .foregroundStyle(theme.colors.secondText)
-            }
-            Spacer()
-            Text(item.amount)
-              .font(.system(size: 16))
-              .fontWeight(.medium)
-              .foregroundStyle(theme.colors.primaryText)
-          }
+        ForEach([TransactionItem.ViewState].mock) { item in
+          TransactionItem(viewState: item)
         }
       }
     }
@@ -218,7 +135,7 @@ extension HomePage: View {
     ScrollView(.vertical) {
       VStack(spacing: 32) {
         topComponent()
-        cardComponent()
+        CardComponent(viewState: .mock)
         buttonGroupComponent()
         transactionComponent()
           .padding(.bottom, 20)

@@ -143,5 +143,6 @@ extension HomePage: View {
       .padding(20)
     }
     .background(theme.colors.background)
+    .toolbar(.hidden, for: .navigationBar)
   }
 }

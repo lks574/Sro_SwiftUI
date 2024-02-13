@@ -15,6 +15,7 @@ extension NumericFunctor {
     guard let number else { return .none }
     let formatter = NumberFormatter()
     formatter.numberStyle = .decimal
+    formatter.maximumSignificantDigits = 3
     return formatter.string(from: NSNumber(value: number))
   }
 }

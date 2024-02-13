@@ -37,13 +37,11 @@ extension MyCardPage {
         Text("Amount: $\(NumericFunctor.formatterDecimal(number: store.amount) ?? "0")")
           .font(.system(size: 13))
           .foregroundStyle(theme.colors.primaryText)
-
-        Slider(
-          value: $store.spendSlider,
-          in: 0...store.maxLimit,
-          onEditingChanged: { isEditing in
-            print("isEditing", isEditing)
-          }
+        CustomSlider(
+          ratio: $store.ratio,
+          viewState: .init(
+            min: .zero,
+            max: store.maxLimit)
         )
         Text(NumericFunctor.formatterDecimal(number: store.spendSlider) ?? "0")
       }

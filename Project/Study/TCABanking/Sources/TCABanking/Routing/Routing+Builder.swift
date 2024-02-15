@@ -77,4 +77,14 @@ extension Routing.Builder {
         })
     )
   }
+
+  public static func statistics() -> StatisticsPage {
+    .init(
+      store: .init(
+        initialState: StatisticsStore.State(),
+        reducer: {
+          StatisticsStore()
+        })
+    )
+  }
 }

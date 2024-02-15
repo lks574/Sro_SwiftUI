@@ -7,7 +7,7 @@ struct AppMain: App {
   var body: some Scene {
     WindowGroup {
       NavigationStack {
-        Routing.Builder.splash()
+        Routing.Builder.statistics()
       }
     }
   }

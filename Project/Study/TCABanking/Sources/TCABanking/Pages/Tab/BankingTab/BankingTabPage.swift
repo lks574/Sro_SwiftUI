@@ -31,6 +31,13 @@ extension BankingTabPage: View {
           Text("My Card")
         }
         .tag(1)
+
+      Routing.Builder.statistics()
+        .tabItem {
+          Image(systemName: "chart.pie")
+          Text("statistics")
+        }
+        .tag(2)
     }
     .accentColor(theme.colors.primary)
     .onAppear {

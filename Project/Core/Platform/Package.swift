@@ -17,7 +17,7 @@ let package = Package(
       .package(path: "../Functor"),
       .package(
         url: "https://github.com/Alamofire/Alamofire.git",
-        .upToNextMajor(from: "5.7.1")),
+        .upToNextMajor(from: "5.9.1")),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.

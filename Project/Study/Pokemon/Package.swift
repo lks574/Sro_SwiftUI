@@ -19,7 +19,7 @@ let package = Package(
     .package(path: "../../Core/Functor"),
     .package(
       url: "https://github.com/pointfreeco/swift-composable-architecture",
-      .upToNextMajor(from: "1.7.2")),
+      .upToNextMajor(from: "1.11.2")),
   ],
   targets: [
     .target(
